@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SD Live2D Commission – DALLTO</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Nunito:wght@400;600;700;800&display=swap');
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Noto Sans KR', 'Nunito', sans-serif;
+      background: linear-gradient(160deg, #fff0f5 0%, #f5f0ff 50%, #f0f5ff 100%);
+      color: #3a3a3a;
+      min-width: 320px;
+    }
+
+    /* ── 공통 섹션 ── */
+    .section {
+      max-width: 760px;
+      margin: 0 auto 32px;
+      padding: 0 16px;
+    }
+
+    .section-card {
+      background: #fff;
+      border-radius: 20px;
+      padding: 28px 24px;
+      box-shadow: 0 4px 20px rgba(220, 100, 150, 0.10);
+      border: 1.5px solid #fde0ec;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #e05a8a;
+      margin-bottom: 20px;
+      letter-spacing: 0.04em;
+    }
+
+    /* ── 상단 헤더 배너 ── */
+    .top-banner {
+      background: linear-gradient(90deg, #f9b8d4 0%, #d4b8f9 100%);
+      text-align: center;
+      padding: 10px 16px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: 0.08em;
+    }
+
+
+    /* ── 작가 소개 ── */
+    .artist-card {
+      max-width: 760px;
+      margin: 0 auto 28px;
+      padding: 0 16px;
+    }
+    .artist-inner {
+      background: #fff;
+      border-radius: 20px;
+      padding: 24px 24px;
+      box-shadow: 0 4px 20px rgba(220, 100, 150, 0.10);
+      border: 1.5px solid #fde0ec;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .artist-avatar {
+      width: 88px;
+      height: 88px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #f9b8d4;
+      flex-shrink: 0;
+      box-shadow: 0 2px 12px rgba(220,100,150,0.18);
+    }
+    .artist-info { flex: 1; }
+    .artist-name {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: #e05a8a;
+      margin-bottom: 2px;
+    }
+    .artist-handle {
+      font-size: 0.8rem;
+      color: #c084a0;
+      margin-bottom: 8px;
+      letter-spacing: 0.03em;
+    }
+    .artist-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 8px;
+    }
+    .artist-tag {
+      background: linear-gradient(90deg, #fde0ec, #ede0fd);
+      color: #e05a8a;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 999px;
+      letter-spacing: 0.04em;
+    }
+    .artist-bio {
+      font-size: 0.82rem;
+      color: #777;
+      line-height: 1.65;
+    }
+    @media (max-width: 480px) {
+      .artist-inner { flex-direction: column; text-align: center; }
+      .artist-tags { justify-content: center; }
+    }
+
+    /* ── 히어로 ── */
+    .hero {
+      text-align: center;
+      padding: 36px 16px 24px;
+    }
+    .hero-badge {
+      display: inline-block;
+      background: linear-gradient(90deg, #f9b8d4, #d4b8f9);
+      color: #fff;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      padding: 4px 14px;
+      border-radius: 999px;
+      margin-bottom: 14px;
+    }
+    .hero h1 {
+      font-size: 2rem;
+      font-weight: 800;
+      color: #e05a8a;
+      line-height: 1.2;
+      margin-bottom: 8px;
+      letter-spacing: 0.02em;
+    }
+    .hero p {
+      font-size: 0.88rem;
+      color: #888;
+      line-height: 1.7;
+    }
+
+    /* ── 가격표 ── */
+    .price-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+    }
+    .price-table thead tr {
+      background: linear-gradient(90deg, #fde0ec, #ede0fd);
+    }
+    .price-table th {
+      padding: 10px 8px;
+      font-weight: 700;
+      color: #e05a8a;
+      text-align: center;
+      font-size: 0.82rem;
+    }
+    .price-table td {
+      padding: 10px 8px;
+      text-align: center;
+      border-bottom: 1px solid #fde0ec;
+      color: #444;
+    }
+    .price-table tr:last-child td { border-bottom: none; }
+    .price-highlight {
+      color: #e05a8a;
+      font-weight: 700;
+    }
+    .price-note {
+      text-align: center;
+      font-size: 0.8rem;
+      color: #e05a8a;
+      margin-top: 14px;
+      font-style: italic;
+    }
+
+    /* ── 샘플 영상 ── */
+    .video-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    .video-item {
+      background: #fff5f9;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1.5px solid #fde0ec;
+    }
+    .video-label {
+      font-size: 0.72rem;
+      color: #e05a8a;
+      font-weight: 600;
+      padding: 8px 10px 4px;
+      text-align: center;
+      line-height: 1.4;
+    }
+    .video-wrapper {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+    }
+    .video-wrapper iframe {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      border: none;
+    }
+
+    /* ── 작업 순서 ── */
+    .steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .step-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      position: relative;
+      padding-bottom: 18px;
+    }
+    .step-item:last-child { padding-bottom: 0; }
+    .step-item:not(:last-child)::before {
+      content: '';
+      position: absolute;
+      left: 17px;
+      top: 36px;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(180deg, #f9b8d4, #d4b8f9);
+    }
+    .step-num {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #f9b8d4, #d4b8f9);
+      color: #fff;
+      font-weight: 800;
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      box-shadow: 0 2px 8px rgba(220,100,150,0.2);
+    }
+    .step-text {
+      padding-top: 7px;
+      font-size: 0.9rem;
+      color: #444;
+      line-height: 1.5;
+    }
+    .step-text strong {
+      display: block;
+      color: #e05a8a;
+      font-weight: 700;
+      margin-bottom: 2px;
+    }
+
+    /* ── 안내사항 ── */
+    .notice-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .notice-list li {
+      font-size: 0.88rem;
+      color: #555;
+      line-height: 1.6;
+      padding-left: 4px;
+    }
+    .notice-list li::before {
+      content: '✦ ';
+      color: #e05a8a;
+      font-size: 0.75rem;
+    }
+
+    /* ── 신청양식 ── */
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .form-group.full { grid-column: 1 / -1; }
+    .form-group label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #e05a8a;
+      letter-spacing: 0.04em;
+    }
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      background: #fff5f9;
+      border: 1.5px solid #fde0ec;
+      border-radius: 8px;
+      padding: 8px 10px;
+      font-size: 0.85rem;
+      font-family: 'Noto Sans KR', sans-serif;
+      color: #444;
+      outline: none;
+      transition: border-color 0.2s;
+      resize: none;
+      width: 100%;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      border-color: #e05a8a;
+      background: #fff;
+    }
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+      color: #ccc;
+      font-size: 0.8rem;
+    }
+    .form-note {
+      text-align: center;
+      font-size: 0.78rem;
+      color: #aaa;
+      margin-top: 14px;
+      line-height: 1.6;
+    }
+
+    /* ── 복사 버튼 ── */
+    .copy-btn-wrap {
+      margin-top: 18px;
+      text-align: center;
+    }
+    .copy-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(90deg, #f9b8d4, #d4b8f9);
+      color: #fff;
+      border: none;
+      border-radius: 999px;
+      padding: 12px 32px;
+      font-size: 0.92rem;
+      font-weight: 700;
+      font-family: 'Noto Sans KR', sans-serif;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(220,100,150,0.25);
+      transition: transform 0.15s, box-shadow 0.15s;
+      letter-spacing: 0.04em;
+    }
+    .copy-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(220,100,150,0.35);
+    }
+    .copy-btn:active { transform: scale(0.97); }
+    .copy-toast {
+      display: none;
+      margin-top: 10px;
+      font-size: 0.8rem;
+      color: #e05a8a;
+      font-weight: 600;
+      animation: fadeIn 0.3s ease;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── 환불 정책 ── */
+    .refund-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .refund-list li {
+      font-size: 0.84rem;
+      color: #555;
+      line-height: 1.6;
+      padding-left: 4px;
+    }
+    .refund-list li::before {
+      content: '✦ ';
+      color: #c084a0;
+      font-size: 0.72rem;
+    }
+
+    /* ── 푸터 ── */
+    .footer {
+      text-align: center;
+      padding: 20px 16px 32px;
+      font-size: 0.75rem;
+      color: #bbb;
+    }
+
+    /* ── 반응형 ── */
+    @media (max-width: 480px) {
+      .hero h1 { font-size: 1.5rem; }
+      .video-grid { grid-template-columns: 1fr; }
+      .form-grid { grid-template-columns: 1fr; }
+      .form-group.full { grid-column: 1; }
+    }
+
+    /* ── 플로팅 배너 ── */
+    .floating-banner {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(80px);
+      opacity: 0;
+      transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1), opacity 0.35s ease;
+      z-index: 999;
+      pointer-events: none;
+    }
+    .floating-banner.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .floating-inner {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: linear-gradient(90deg, #f9b8d4 0%, #d4b8f9 100%);
+      border-radius: 999px;
+      padding: 12px 22px 12px 16px;
+      box-shadow: 0 6px 24px rgba(220,100,150,0.32);
+      white-space: nowrap;
+    }
+    .floating-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid rgba(255,255,255,0.7);
+      flex-shrink: 0;
+    }
+    .floating-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.3;
+    }
+    .floating-name {
+      font-size: 0.82rem;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: 0.04em;
+    }
+    .floating-sub {
+      font-size: 0.7rem;
+      color: rgba(255,255,255,0.85);
+    }
+    .floating-btn {
+      background: #fff;
+      color: #e05a8a;
+      font-size: 0.75rem;
+      font-weight: 800;
+      font-family: 'Noto Sans KR', sans-serif;
+      border: none;
+      border-radius: 999px;
+      padding: 6px 14px;
+      cursor: pointer;
+      letter-spacing: 0.03em;
+      transition: background 0.2s, color 0.2s;
+      flex-shrink: 0;
+    }
+    .floating-btn:hover {
+      background: #e05a8a;
+      color: #fff;
+    }
+    @media (max-width: 480px) {
+      .floating-inner { padding: 10px 16px 10px 12px; gap: 8px; }
+      .floating-name { font-size: 0.75rem; }
+      .floating-sub { font-size: 0.65rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 상단 배너 -->
+  <div class="top-banner">✦ SD Live2D Commission ✦</div>
+
+
+  <!-- 작가 소개 -->
+  <div class="artist-card">
+    <div class="artist-inner">
+      <img class="artist-avatar" src="https://pbs.twimg.com/profile_images/2030643719083556864/ZZFJ3Gxi_400x400.jpg" alt="달토 프로필" />
+      <div class="artist-info">
+        <div class="artist-name">달토 DALLTO</div>
+        <div class="artist-handle">@DALLTO_COMS</div>
+        <div class="artist-tags">
+          <span class="artist-tag">✦ 일러스트</span>
+          <span class="artist-tag">✦ LIVE 2D</span>
+          <span class="artist-tag">✦ SD 캐릭터</span>
+        </div>
+        <div class="artist-bio">
+          귀엽고 깔끔한 무드의 SD 캐릭터와 Live2D 리깅을 작업합니다.<br>
+          여러분의 소중한 캐릭터를 생동감 있게 만들어드릴게요 ♡<br>
+          방송용 · 개인소장용 모두 편하게 문의 주세요!
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 히어로 -->
+  <div class="hero">
+    <div class="hero-badge">COMMISSION OPEN ✦</div>
+    <h1>SD LIVE 2D<br>COMMISSION</h1>
+    <p>귀엽고 깔끔한 무드로 작업해드려요<br>방송용 · 개인소장용 모두 편하게 문의 주세요</p>
+  </div>
+
+  <!-- 가격 안내 -->
+  <div class="section">
+    <div class="section-card">
+      <div class="section-title">✦ 가격 안내 ✦</div>
+      <table class="price-table">
+        <thead>
+          <tr>
+            <th>옵션명</th>
+            <th>옵션 선택 항목</th>
+            <th>제작 금액</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>SD 라투디</td>
+            <td><strong>일러스트 + 리깅 (표정 2종)</strong></td>
+            <td class="price-highlight">250,000원</td>
+          </tr>
+          <tr>
+            <td>SD 라투디</td>
+            <td>일러스트 (파츠분리) 만</td>
+            <td>150,000원</td>
+          </tr>
+          <tr>
+            <td>SD 라투디</td>
+            <td>리깅만</td>
+            <td>150,000원</td>
+          </tr>
+          <tr>
+            <td>옵션</td>
+            <td>3일 빠른마감</td>
+            <td>+40,000원</td>
+          </tr>
+          <tr>
+            <td>옵션</td>
+            <td>당일마감</td>
+            <td>+80,000원</td>
+          </tr>
+          <tr>
+            <td>옵션</td>
+            <td>표정추가</td>
+            <td>+30,000원</td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="price-note">기본 구성은 일러스트 + 리깅 + 표정 2종 입니다</p>
+    </div>
+  </div>
+
+  <!-- 샘플 영상 -->
+  <div class="section">
+    <div class="section-card">
+      <div class="section-title">✦ 샘플 영상 ✦</div>
+      <div class="video-grid">
+
+        <div class="video-item">
+          <div class="video-label">✦ 【 live2d showcase 】<br>DALLTO SD VTUBER</div>
+          <div class="video-wrapper">
+            <iframe src="https://www.youtube.com/embed/wPCqHMt3PNw"
+              title="【 live2d showcase 】DALLTO SD VTUBER"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          </div>
+        </div>
+
+        <div class="video-item">
+          <div class="video-label">✦ 【 live2d showcase 】<br>애옥이 SD VTUBER</div>
+          <div class="video-wrapper">
+            <iframe src="https://www.youtube.com/embed/OQSVPyQPMao"
+              title="【 live2d showcase 】애옥이 SD VTUBER"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          </div>
+        </div>
+
+        <div class="video-item">
+          <div class="video-label">✦ 【 live2d showcase 】<br>오배기 SD VTUBER</div>
+          <div class="video-wrapper">
+            <iframe src="https://www.youtube.com/embed/2qF1_vKeGkk"
+              title="【 live2d showcase 】오배기 SD VTUBER"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          </div>
+        </div>
+
+        <div class="video-item">
+          <div class="video-label">✦ 【 live2d showcase 】<br>현 SD Live2D 샘플</div>
+          <div class="video-wrapper">
+            <iframe src="https://www.youtube.com/embed/3xNCB8OFfDo"
+              title="【 live2d showcase 】현 SD VTUBER"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- 작업 순서 -->
+  <div class="section">
+    <div class="section-card">
+      <div class="section-title">✦ 작업 순서 ✦</div>
+      <div class="steps">
+        <div class="step-item">
+          <div class="step-num">01</div>
+          <div class="step-text"><strong>문의 및 신청</strong>신청양식을 작성해 문의게시판으로 보내주세요.</div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">02</div>
+          <div class="step-text"><strong>자료 확인 및 견적 안내</strong>캐릭터 자료 확인 후 견적 및 일정을 안내드립니다.</div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">03</div>
+          <div class="step-text"><strong>결제 확인 후 작업 시작</strong>결제 완료 확인 후 작업이 시작됩니다.</div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">04</div>
+          <div class="step-text"><strong>일러스트 및 파츠분리 진행</strong>SD 일러스트 작업 및 Live2D용 파츠분리를 진행합니다.</div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">05</div>
+          <div class="step-text"><strong>리깅 작업 진행</strong>파츠분리된 일러스트를 바탕으로 리깅 작업을 진행합니다.</div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">06</div>
+          <div class="step-text"><strong>최종 확인 후 전달</strong>최종 파일(PNG + Live2D 파일)을 전달해드립니다.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 안내사항 -->
+  <div class="section">
+    <div class="section-card">
+      <div class="section-title">✦ 안내사항 ✦</div>
+      <ul class="notice-list">
+        <li>SD 특성상 디테일은 간소화되어 표현됩니다</li>
+        <li>복잡한 장식, 패턴, 악세사리는 일부 생략 또는 단순화될 수 있습니다</li>
+        <li>작업물은 Live2D 구동 기준으로 제작되며, 정지 일러스트와 차이가 있을 수 있습니다</li>
+        <li>기본 제공 범위를 제외한 추가 파츠 및 추가 표정은 별도 비용이 발생합니다</li>
+        <li>수정은 기본 범위 내에서 가능하며, 큰 구조 변경은 추가 비용이 발생할 수 있습니다</li>
+        <li>작업 전 캐릭터 자료와 원하는 분위기를 충분히 전달 부탁드립니다</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 신청양식 -->
+  <div class="section">
+    <div class="section-card">
+      <div class="section-title">✦ 신청양식 ✦</div>
+      <div class="form-grid">
+        <div class="form-group">
+          <label>닉네임</label>
+          <input id="f-nick" type="text" placeholder="닉네임을 입력해주세요" />
+        </div>
+        <div class="form-group">
+          <label>연락 가능한 연락처</label>
+          <input id="f-contact" type="text" placeholder="Discord / SNS 아이디 등" />
+        </div>
+        <div class="form-group">
+          <label>신청 타입</label>
+          <select id="f-type">
+            <option value="">선택해주세요</option>
+            <option>일러스트 + 리깅 (세트)</option>
+            <option>일러스트 (파츠분리) 만</option>
+            <option>리깅만</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>사용 용도</label>
+          <select id="f-purpose">
+            <option value="">선택해주세요</option>
+            <option>개인 소장</option>
+            <option>방송용 (비상업)</option>
+            <option>상업용</option>
+          </select>
+        </div>
+        <div class="form-group full">
+          <label>캐릭터 자료</label>
+          <textarea id="f-ref" rows="3" placeholder="레퍼런스 이미지 링크 또는 캐릭터 설명을 적어주세요"></textarea>
+        </div>
+        <div class="form-group full">
+          <label>원하는 표정 및 추가 옵션</label>
+          <textarea id="f-option" rows="2" placeholder="원하는 표정 종류, 추가 옵션 등을 적어주세요"></textarea>
+        </div>
+        <div class="form-group">
+          <label>희망 마감일</label>
+          <input id="f-deadline" type="text" placeholder="없으면 '없음' 기재" />
+        </div>
+        <div class="form-group">
+          <label>기타 요청사항</label>
+          <input id="f-etc" type="text" placeholder="자유롭게 작성해주세요" />
+        </div>
+      </div>
+
+      <div class="copy-btn-wrap">
+        <button class="copy-btn" onclick="copyForm()">
+          ✦ 신청양식 복사하기
+        </button>
+        <div class="copy-toast" id="copy-toast">📋 복사됐어요! 문의게시판에 붙여넣기 해주세요 ♡</div>
+      </div>
+
+      <p class="form-note">신청양식을 작성 후 복사하여 문의게시판에 붙여넣기 해주세요<br>확인 후 순차적으로 답변드립니다 ♡</p>
+    </div>
+  </div>
+
+  <!-- 환불 정책 -->
+  <div class="section">
+    <div class="section-card">
+      <div class="section-title">✦ 환불 정책 ✦</div>
+      <ul class="refund-list">
+        <li><strong>리깅</strong> : 작업의 반 완성 시 30% 환불, 물리 들어갈 시 환불 불가</li>
+        <li><strong>일러스트</strong> : 1차 컨펌 시 40% 환불 / 2차 컨펌 이후 환불 불가</li>
+        <li><strong>세트주문</strong> : 리깅 시작 이후 환불 불가</li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    function copyForm() {
+      const nick     = document.getElementById('f-nick').value.trim()     || '(미입력)';
+      const contact  = document.getElementById('f-contact').value.trim()  || '(미입력)';
+      const type     = document.getElementById('f-type').value            || '(미선택)';
+      const purpose  = document.getElementById('f-purpose').value         || '(미선택)';
+      const ref      = document.getElementById('f-ref').value.trim()      || '(미입력)';
+      const option   = document.getElementById('f-option').value.trim()   || '(미입력)';
+      const deadline = document.getElementById('f-deadline').value.trim() || '(미입력)';
+      const etc      = document.getElementById('f-etc').value.trim()      || '(미입력)';
+
+      const text =
+`✦ SD Live2D 커미션 신청양식 ✦
+
+닉네임 : ${nick}
+연락 가능한 연락처 : ${contact}
+신청 타입 : ${type}
+사용 용도 : ${purpose}
+캐릭터 자료 : ${ref}
+원하는 표정 및 추가 옵션 : ${option}
+희망 마감일 : ${deadline}
+기타 요청사항 : ${etc}`;
+
+      navigator.clipboard.writeText(text).then(() => {
+        const toast = document.getElementById('copy-toast');
+        toast.style.display = 'block';
+        setTimeout(() => { toast.style.display = 'none'; }, 3000);
+      }).catch(() => {
+        // fallback
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        const toast = document.getElementById('copy-toast');
+        toast.style.display = 'block';
+        setTimeout(() => { toast.style.display = 'none'; }, 3000);
+      });
+      </script>
+
+  <script>
+    // 플로팅 배너 아바타 이미지 동기화
+    (function() {
+      const mainAvatar = document.querySelector('.artist-avatar');
+      const floatAvatar = document.getElementById('floatingAvatar');
+      if (mainAvatar && floatAvatar) {
+        floatAvatar.src = mainAvatar.src;
+      }
+    })();
+
+    // 스크롤 시 배너 표시 (히어로 영역 지나면 등장)
+    const banner = document.getElementById('floatingBanner');
+    window.addEventListener('scroll', function() {
+      if (window.scrollY > 200) {
+        banner.classList.add('show');
+      } else {
+        banner.classList.remove('show');
+      }
+    });
+
+    // 신청하기 버튼 → 신청양식 섹션으로 스크롤
+    function scrollToForm() {
+      const formSection = document.getElementById('f-nick');
+      if (formSection) {
+        formSection.closest('.section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        setTimeout(() => formSection.focus(), 600);
+      }
+    }
+  </script>
+
+  <!-- 푸터 -->배너 -->
+  <div class="floating-banner" id="floatingBanner">
+    <div class="floating-inner">
+      <img class="floating-avatar" src="" id="floatingAvatar" alt="달토" />
+      <div class="floating-text">
+        <span class="floating-name">✦ 달토 DALLTO</span>
+        <span class="floating-sub">SD Live2D 커미션 오픈 중!</span>
+      </div>
+      <button class="floating-btn" onclick="scrollToForm()">신청하기 ♡</button>
+    </div>
+  </div>
+
+  <!-- 푸터 -->
+  <div class="footer">
+    ✦ 소중한 작업 맡겨주셔서 감사합니다 ♡ ✦<br>
+    샘플 영상과 안내사항을 꼭 확인하신 뒤 문의 부탁드립니다
+  </div>
+
+</body>
+</html>
