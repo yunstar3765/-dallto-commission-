@@ -891,12 +891,11 @@
   
   // 사이드 네비 스크롤 표시/숨김
   var sideNav = document.getElementById('sideNav');
+  // 페이지 로드 시 바로 표시
+  sideNav.classList.add('visible');
   window.addEventListener('scroll', function() {
-    if (window.scrollY > 200) {
-      sideNav.classList.add('visible');
-    } else {
-      sideNav.classList.remove('visible');
-    }
+    // 항상 표시 유지
+    sideNav.classList.add('visible');
     var sections = ['sec-price','sec-sample','sec-process','sec-notice','sec-form','sec-refund'];
     var btns = document.querySelectorAll('.side-nav-btn');
     var current = '';
