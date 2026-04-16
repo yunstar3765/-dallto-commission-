@@ -482,88 +482,6 @@
       .floating-sub { font-size: 0.65rem; }
     }
   
-  /* -- 사이드 네비 배너 -- */
-  .side-nav {
-    position: fixed;
-    left: 16px;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 9999;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0;
-    opacity: 1;
-    transition: opacity 0.4s ease;
-    pointer-events: all;
-  }
-  .side-nav.visible {
-    opacity: 1;
-    pointer-events: all;
-  }
-  .side-nav-wrap {
-    background: linear-gradient(160deg, #fff0f8 0%, #f5e6ff 100%);
-    border: 2.5px solid #f0a0c0;
-    border-radius: 22px;
-    padding: 14px 10px;
-    box-shadow: 0 4px 20px rgba(220, 100, 150, 0.18), 0 0 0 4px rgba(240, 160, 192, 0.15);
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    position: relative;
-  }
-  .side-nav-wrap::before {
-    content: 'DALLTO';
-    display: block;
-    text-align: center;
-    font-size: 10px;
-    font-weight: 900;
-    color: #e87fa8;
-    letter-spacing: 1px;
-    margin-bottom: 4px;
-  }
-  .side-nav-wrap::after {
-    content: 'SD Live2D';
-    display: block;
-    text-align: center;
-    font-size: 9px;
-    font-weight: 700;
-    color: #c8a0e0;
-    margin-top: 4px;
-  }
-  .side-nav-btn {
-    display: block;
-    background: linear-gradient(135deg, #ffd6e8 0%, #e8c8ff 100%);
-    border: 1.5px solid #f0a0c0;
-    border-radius: 12px;
-    padding: 8px 14px;
-    font-size: 12px;
-    font-weight: 700;
-    color: #c0507a;
-    text-decoration: none;
-    text-align: center;
-    white-space: nowrap;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    font-family: 'Noto Sans KR', sans-serif;
-    box-shadow: 0 2px 6px rgba(220, 100, 150, 0.15);
-    letter-spacing: -0.3px;
-  }
-  .side-nav-btn:hover {
-    background: linear-gradient(135deg, #ffb8d8 0%, #d8a8ff 100%);
-    color: #a03060;
-    transform: scale(1.05);
-    box-shadow: 0 4px 12px rgba(220, 100, 150, 0.3);
-    text-decoration: none;
-  }
-  .side-nav-btn.active {
-    background: linear-gradient(135deg, #ff8fb8 0%, #c87fff 100%);
-    color: #fff;
-    border-color: #e060a0;
-  }
-  @media (max-width: 600px) {
-    /* .side-nav { display: none; } */
-  }
 
 </style>
 </head>
@@ -889,25 +807,7 @@
       }
     }
   
-  // 사이드 네비 스크롤 표시/숨김
-  var sideNav = document.getElementById('sideNav');
-  // 페이지 로드 시 바로 표시
-  sideNav.classList.add('visible');
-  window.addEventListener('scroll', function() {
-    // 항상 표시 유지
-    sideNav.classList.add('visible');
-    var sections = ['sec-price','sec-sample','sec-process','sec-notice','sec-form','sec-refund'];
-    var btns = document.querySelectorAll('.side-nav-btn');
-    var current = '';
-    sections.forEach(function(id) {
-      var el = document.getElementById(id);
-      if (el && window.scrollY >= el.offsetTop - 120) current = id;
-    });
-    btns.forEach(function(btn) {
-      btn.classList.remove('active');
-      if (btn.getAttribute('href') === '#' + current) btn.classList.add('active');
-    });
-  });
+
 
   </script>
 
@@ -929,18 +829,6 @@
     샘플 영상과 안내사항을 꼭 확인하신 뒤 문의 부탁드립니다
   </div>
 
-
-  <!-- 사이드 네비 배너 -->
-  <div class="side-nav" id="sideNav">
-    <div class="side-nav-wrap">
-      <a class="side-nav-btn" href="#sec-price">&#128176; 가격 안내</a>
-      <a class="side-nav-btn" href="#sec-sample">&#127909; 샘플 영상</a>
-      <a class="side-nav-btn" href="#sec-process">&#128203; 작업 순서</a>
-      <a class="side-nav-btn" href="#sec-notice">&#128204; 안내사항</a>
-      <a class="side-nav-btn" href="#sec-form">&#9997;&#65039; 신청양식</a>
-      <a class="side-nav-btn" href="#sec-refund">&#128184; 환불 정책</a>
-    </div>
-  </div>
 
 </body>
 </html>
