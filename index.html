@@ -439,6 +439,53 @@
       margin-top: 12px; line-height: 1.8;
     }
 
+    /* ── 모달 ── */
+    .modal-overlay {
+      display: none;
+      position: fixed; top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.75);
+      z-index: 9999;
+      align-items: center; justify-content: center;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal-inner {
+      position: relative;
+      max-width: 90vw; max-height: 90vh;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    }
+    .modal-inner img {
+      display: block;
+      max-width: 90vw; max-height: 90vh;
+      object-fit: contain;
+    }
+    .modal-close {
+      position: absolute; top: 12px; right: 12px;
+      width: 36px; height: 36px;
+      background: rgba(0,0,0,0.6);
+      border: none; border-radius: 50%;
+      color: #fff; font-size: 1.1rem;
+      cursor: pointer; display: flex;
+      align-items: center; justify-content: center;
+      transition: background 0.2s;
+    }
+    .modal-close:hover { background: var(--accent); }
+    /* ── 문의 마크 ── */
+    .inquiry-badge {
+      display: inline-flex; align-items: center; gap: 4px;
+      background: var(--accent-light);
+      color: var(--accent);
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.68rem; font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 20px;
+      border: 1px solid var(--accent);
+      margin-bottom: 6px;
+      letter-spacing: 0.03em;
+    }
+
     /* ── 예약 모델 ── */
     .reserve-grid {
       display: grid;
@@ -451,6 +498,7 @@
       border: 1px solid var(--border);
       background: var(--bg2);
       transition: box-shadow 0.25s, transform 0.25s;
+      cursor: pointer;
     }
     .reserve-card:hover {
       box-shadow: 0 8px 28px rgba(0,0,0,0.1);
@@ -889,6 +937,7 @@
         </div>
         <div class="price-card">
           <div class="price-card-left">
+            <div class="inquiry-badge">&#128172; 문의 필수</div>
             <div class="price-card-type">LD · Illustration Only</div>
             <div class="price-card-name">캐릭터 파츠분리 일러스트</div>
             <div class="price-card-desc">Live2D용 파츠분리 일러스트만 제작</div>
@@ -960,7 +1009,7 @@
       리깅은 시얀에게 맡기셔도 되고, 다른 리거에게 맡기셔도 됩니다 ♡
     </p>
     <div class="reserve-grid">
-      <div class="reserve-card">
+      <div class="reserve-card" onclick="openModal('https://raw.githubusercontent.com/yunstar3765/-dallto-commission-/main/assets/sample1.webp')">
         <div class="reserve-img-wrap">
           <img src="https://raw.githubusercontent.com/yunstar3765/-dallto-commission-/main/assets/sample1.webp" alt="예약 모델 1" />
         </div>
@@ -974,7 +1023,7 @@
           </div>
         </div>
       </div>
-      <div class="reserve-card">
+      <div class="reserve-card" onclick="openModal('https://raw.githubusercontent.com/yunstar3765/-dallto-commission-/main/assets/sample2.webp')">
         <div class="reserve-img-wrap">
           <img src="https://raw.githubusercontent.com/yunstar3765/-dallto-commission-/main/assets/sample2.webp" alt="예약 모델 2" />
         </div>
@@ -1032,6 +1081,7 @@
     <div class="section-chip">Notice</div>
     <div class="section-title">안내사항 <em>Guidelines</em></div>
     <ul class="notice-list" style="margin-top:8px;">
+      <li>작업 소요 기간은 평균 <strong>40일</strong> 정도 소요됩니다. (일러스트 내용에 따라 달라질 수 있습니다)</li>
       <li>복잡한 장식, 패턴, 악세사리는 일부 생략 또는 단순화될 수 있습니다.</li>
       <li>작업물은 Live2D 구동 기준으로 제작되며, 정지 일러스트와 차이가 있을 수 있습니다.</li>
       <li>기본 제공 범위를 제외한 추가 파츠 및 추가 표정은 별도 비용이 발생합니다.</li>
@@ -1161,6 +1211,24 @@
       t.style.display = 'block';
       setTimeout(() => { t.style.display = 'none'; }, 3000);
     }
+  </script>
+  <!-- 모달 -->
+  <div class="modal-overlay" id="img-modal" onclick="closeModal(event)">
+    <div class="modal-inner">
+      <button class="modal-close" onclick="document.getElementById('img-modal').classList.remove('open')">&#10005;</button>
+      <img id="modal-img" src="" alt="확대 이미지" />
+    </div>
+  </div>
+  <script>
+  function openModal(src) {
+    document.getElementById('modal-img').src = src;
+    document.getElementById('img-modal').classList.add('open');
+  }
+  function closeModal(e) {
+    if (e.target === document.getElementById('img-modal')) {
+      document.getElementById('img-modal').classList.remove('open');
+    }
+  }
   </script>
 </body>
 </html>
