@@ -3,27 +3,35 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Live2D Commission – DALLTO</title>
+  <title>Live2D Commission – SIYAN</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Noto+Sans+KR:wght@300;400;500&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Noto+Sans+KR:wght@300;400;500&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg: #0a0a0a;
-      --bg2: #111111;
-      --bg3: #161616;
-      --border: rgba(255,255,255,0.07);
-      --border-light: rgba(255,255,255,0.14);
-      --text: #ffffff;
-      --text-sub: #888888;
-      --text-muted: #505050;
+      --bg: #fafaf8;
+      --bg2: #f4f3f0;
+      --bg3: #eeecea;
+      --border: rgba(0,0,0,0.07);
+      --border-mid: rgba(0,0,0,0.12);
+      --text: #1a1a1a;
+      --text-sub: #666666;
+      --text-muted: #aaaaaa;
+      --accent: #7c6ee0;
+      --accent-light: #ede9ff;
+      --accent2: #e0a0c8;
+      --accent2-light: #fdeef6;
+      --tag-bg: #f0eeff;
+      --tag-text: #7c6ee0;
+      --radius: 20px;
+      --radius-sm: 12px;
     }
 
     html { scroll-behavior: smooth; }
     body {
-      font-family: 'Noto Sans KR', 'Montserrat', sans-serif;
+      font-family: 'Noto Sans KR', 'Nunito', sans-serif;
       background: var(--bg);
       color: var(--text);
       overflow-x: hidden;
@@ -32,463 +40,539 @@
     /* ── 상단 네비 ── */
     .top-bar {
       width: 100%;
-      padding: 10px 32px;
-      border-bottom: 1px solid var(--border);
+      padding: 0 40px;
+      height: 56px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background: var(--bg);
+      background: rgba(250,250,248,0.92);
+      backdrop-filter: blur(12px);
       position: sticky;
       top: 0;
       z-index: 100;
+      border-bottom: 1px solid var(--border);
     }
     .top-bar-logo {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.7rem;
-      font-weight: 500;
-      letter-spacing: 0.2em;
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
       color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+    .top-bar-logo .dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+      display: inline-block;
     }
     .top-bar-nav {
       display: flex;
-      gap: 24px;
+      gap: 4px;
     }
     .top-bar-nav a {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.62rem;
-      font-weight: 500;
-      letter-spacing: 0.14em;
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
       color: var(--text-sub);
       text-decoration: none;
-      transition: color 0.2s;
-      text-transform: uppercase;
+      padding: 6px 14px;
+      border-radius: 20px;
+      transition: background 0.2s, color 0.2s;
     }
-    .top-bar-nav a:hover { color: var(--text); }
+    .top-bar-nav a:hover {
+      background: var(--accent-light);
+      color: var(--accent);
+    }
 
     /* ── 히어로 ── */
     .hero {
+      padding: 72px 48px 64px;
+      max-width: 860px;
+      margin: 0 auto;
       position: relative;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 80px 48px;
-      overflow: hidden;
     }
-    .hero-ribbon {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      z-index: 0;
-    }
-    .hero-ribbon svg {
-      width: 100%; height: 100%;
-      position: absolute; top: 0; left: 0;
-    }
-    .hero-content {
-      position: relative;
-      z-index: 1;
-      max-width: 620px;
-    }
-    .hero-label {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.62rem;
-      font-weight: 500;
-      letter-spacing: 0.24em;
-      color: var(--text-muted);
-      margin-bottom: 20px;
-      text-transform: uppercase;
-    }
-    .hero-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(3rem, 8vw, 5.5rem);
-      font-weight: 300;
-      line-height: 1.05;
-      margin-bottom: 6px;
-    }
-    .hero-title em { font-style: italic; }
-    .hero-sub {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(1.1rem, 2.5vw, 1.6rem);
-      font-weight: 300;
-      font-style: italic;
-      color: var(--text-sub);
-      margin-bottom: 28px;
-    }
-    .hero-divider {
-      width: 40px; height: 1px;
-      background: var(--border-light);
+    .hero-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--accent-light);
+      color: var(--accent);
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      padding: 5px 14px;
+      border-radius: 20px;
       margin-bottom: 24px;
     }
-    .hero-desc {
-      font-size: 0.8rem;
-      font-weight: 300;
+    .hero-chip::before { content: '✦'; font-size: 0.6rem; }
+    .hero-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2.6rem, 6vw, 4.2rem);
+      font-weight: 400;
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+      margin-bottom: 8px;
+      color: var(--text);
+    }
+    .hero-title em {
+      font-style: italic;
+      color: var(--accent);
+    }
+    .hero-sub {
+      font-family: 'Nunito', sans-serif;
+      font-size: 1rem;
+      font-weight: 400;
       color: var(--text-sub);
-      line-height: 2;
-      margin-bottom: 36px;
+      margin-bottom: 20px;
     }
-    .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+    .hero-desc {
+      font-size: 0.88rem;
+      font-weight: 400;
+      color: var(--text-sub);
+      line-height: 1.9;
+      max-width: 480px;
+      margin-bottom: 32px;
+    }
+    .hero-btns { display: flex; gap: 10px; flex-wrap: wrap; }
     .btn-primary {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.68rem; font-weight: 500;
-      letter-spacing: 0.14em; text-transform: uppercase;
-      padding: 12px 28px;
-      background: var(--text); color: var(--bg);
-      border: none; cursor: pointer;
-      transition: opacity 0.2s;
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.82rem; font-weight: 700;
+      padding: 11px 26px;
+      background: var(--accent);
+      color: #fff;
+      border: none; border-radius: 24px;
+      cursor: pointer; transition: opacity 0.2s, transform 0.15s;
       text-decoration: none; display: inline-block;
+      box-shadow: 0 4px 16px rgba(124,110,224,0.28);
     }
-    .btn-primary:hover { opacity: 0.85; }
+    .btn-primary:hover { opacity: 0.9; transform: translateY(-1px); }
     .btn-outline {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.68rem; font-weight: 500;
-      letter-spacing: 0.14em; text-transform: uppercase;
-      padding: 12px 28px;
-      background: transparent; color: var(--text);
-      border: 1px solid var(--border-light);
-      cursor: pointer; transition: border-color 0.2s;
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.82rem; font-weight: 700;
+      padding: 11px 26px;
+      background: transparent;
+      color: var(--accent);
+      border: 1.5px solid var(--accent);
+      border-radius: 24px;
+      cursor: pointer; transition: background 0.2s;
       text-decoration: none; display: inline-block;
     }
-    .btn-outline:hover { border-color: var(--text); }
+    .btn-outline:hover { background: var(--accent-light); }
 
-    /* ── ECG 장식 ── */
-    .ecg-line {
-      width: 100%; height: 20px;
-      overflow: hidden; opacity: 0.15;
+    /* ── 구분선 ── */
+    .divider {
+      max-width: 860px;
+      margin: 0 auto;
+      height: 1px;
+      background: var(--border);
     }
-    .ecg-line svg { width: 100%; height: 100%; }
 
     /* ── 공통 섹션 ── */
     .section {
-      padding: 80px 48px;
-      border-top: 1px solid var(--border);
-      max-width: 960px;
+      padding: 64px 48px;
+      max-width: 860px;
       margin: 0 auto;
     }
-    .section-label {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.58rem; font-weight: 500;
-      letter-spacing: 0.24em; text-transform: uppercase;
-      color: var(--text-muted); margin-bottom: 16px;
+    .section-header {
+      display: flex;
+      align-items: flex-end;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+    .section-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: var(--accent-light);
+      color: var(--accent);
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 4px 11px;
+      border-radius: 20px;
+      margin-bottom: 10px;
+      display: block;
     }
     .section-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(1.8rem, 4vw, 2.8rem);
-      font-weight: 300; line-height: 1.15; margin-bottom: 6px;
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      font-weight: 400;
+      line-height: 1.2;
+      color: var(--text);
     }
-    .section-title em { font-style: italic; }
-    .section-divider {
-      width: 36px; height: 1px;
-      background: var(--border-light);
-      margin: 20px 0 32px;
-    }
+    .section-title em { font-style: italic; color: var(--accent); }
     .section-desc {
-      font-size: 0.8rem; font-weight: 300;
-      color: var(--text-sub); line-height: 2;
-      max-width: 540px; margin-bottom: 36px;
+      font-size: 0.85rem;
+      font-weight: 400;
+      color: var(--text-sub);
+      line-height: 1.9;
+      margin-top: 10px;
+      margin-bottom: 28px;
     }
 
     /* ── GIF 쇼케이스 ── */
-    .showcase-grid {
+    .gif-row {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2px;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 10px;
     }
-    .showcase-item { position: relative; overflow: hidden; }
-    .showcase-item img {
-      width: 100%; aspect-ratio: 1/1;
+    .gif-row-3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 10px;
+    }
+    .gif-block { display: flex; flex-direction: column; gap: 0; }
+    .gif-img-wrap {
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      background: var(--bg2);
+      aspect-ratio: 1/1;
+    }
+    .gif-img-wrap img {
+      width: 100%; height: 100%;
       object-fit: cover;
       display: block;
-      filter: brightness(0.92);
-      transition: filter 0.3s;
+      transition: transform 0.35s;
     }
-    .showcase-item:hover img { filter: brightness(1); }
-    .showcase-caption {
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      padding: 20px 12px 10px;
-      background: linear-gradient(transparent, rgba(0,0,0,0.75));
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.58rem; font-weight: 500;
-      letter-spacing: 0.14em; text-transform: uppercase;
-      color: rgba(255,255,255,0.7);
-      opacity: 0;
-      transition: opacity 0.3s;
+    .gif-block:hover .gif-img-wrap img { transform: scale(1.03); }
+    .gif-caption {
+      padding: 10px 4px 0;
     }
-    .showcase-item:hover .showcase-caption { opacity: 1; }
+    .gif-caption-title {
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 2px;
+    }
+    .gif-caption-desc {
+      font-size: 0.73rem;
+      font-weight: 400;
+      color: var(--text-sub);
+      line-height: 1.6;
+    }
+    .gif-section-gap { margin-bottom: 28px; }
 
-    /* ── 유튜브 쇼케이스 ── */
+    /* ── 유튜브 ── */
     .youtube-wrap {
+      border-radius: var(--radius);
+      overflow: hidden;
       position: relative;
       padding-bottom: 56.25%;
-      height: 0; overflow: hidden;
-      border: 1px solid var(--border);
+      height: 0;
+      background: var(--bg2);
+      margin-top: 32px;
     }
     .youtube-wrap iframe {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      border: none;
+      position: absolute; top: 0; left: 0;
+      width: 100%; height: 100%; border: none;
     }
     .youtube-label {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.6rem; font-weight: 500;
-      letter-spacing: 0.12em; text-transform: uppercase;
-      color: var(--text-muted); margin-bottom: 10px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.72rem; font-weight: 700;
+      color: var(--text-muted);
+      margin-top: 32px;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
     }
 
     /* ── 가격 ── */
     .price-tabs {
       display: flex;
-      gap: 0;
-      border-bottom: 1px solid var(--border-light);
-      margin-bottom: 32px;
+      gap: 6px;
+      margin-bottom: 24px;
     }
     .price-tab {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.65rem; font-weight: 500;
-      letter-spacing: 0.14em; text-transform: uppercase;
-      padding: 10px 24px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.78rem; font-weight: 700;
+      padding: 8px 20px;
+      border-radius: 20px;
+      border: 1.5px solid var(--border-mid);
+      background: transparent;
+      color: var(--text-sub);
       cursor: pointer;
-      border-bottom: 2px solid transparent;
-      color: var(--text-muted);
-      transition: color 0.2s, border-color 0.2s;
-      background: none; border-top: none; border-left: none; border-right: none;
+      transition: all 0.2s;
     }
     .price-tab.active {
-      color: var(--text);
-      border-bottom-color: var(--text);
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+      box-shadow: 0 3px 12px rgba(124,110,224,0.25);
     }
     .price-panel { display: none; }
     .price-panel.active { display: block; }
 
-    .price-table {
-      width: 100%; border-collapse: collapse; margin-bottom: 12px;
+    .price-cards { display: flex; flex-direction: column; gap: 10px; }
+    .price-card {
+      background: var(--bg2);
+      border-radius: var(--radius-sm);
+      padding: 18px 22px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      border: 1px solid var(--border);
+      transition: border-color 0.2s, box-shadow 0.2s;
     }
-    .price-table thead tr { border-bottom: 1px solid var(--border-light); }
-    .price-table th {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.58rem; font-weight: 500;
-      letter-spacing: 0.14em; text-transform: uppercase;
-      color: var(--text-muted);
-      padding: 10px 12px 10px 0; text-align: left;
+    .price-card:hover {
+      border-color: var(--accent);
+      box-shadow: 0 4px 16px rgba(124,110,224,0.1);
     }
-    .price-table td {
-      font-size: 0.8rem; font-weight: 300;
-      color: var(--text-sub);
-      padding: 14px 12px 14px 0;
-      border-bottom: 1px solid var(--border);
-      vertical-align: top;
+    .price-card-left { flex: 1; }
+    .price-card-type {
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.65rem; font-weight: 700;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 4px;
     }
-    .price-table td:first-child {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.62rem; letter-spacing: 0.06em;
-      color: var(--text-muted);
+    .price-card-name {
+      font-size: 0.9rem; font-weight: 500;
+      color: var(--text);
+      margin-bottom: 3px;
     }
-    .price-big {
-      font-family: 'Cormorant Garamond', serif !important;
-      font-size: 1.15rem !important;
-      font-weight: 400 !important;
-      color: var(--text) !important;
+    .price-card-desc {
+      font-size: 0.75rem; font-weight: 400;
+      color: var(--text-sub); line-height: 1.6;
     }
-    .price-sale {
-      display: inline-block;
-      background: var(--text);
-      color: var(--bg);
-      font-family: 'Montserrat', sans-serif !important;
-      font-size: 0.55rem !important;
-      font-weight: 600 !important;
-      letter-spacing: 0.1em;
-      padding: 2px 7px;
-      margin-left: 8px;
-      vertical-align: middle;
+    .price-card-right { text-align: right; flex-shrink: 0; }
+    .price-amount {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.4rem; font-weight: 400;
+      color: var(--text);
+      white-space: nowrap;
     }
     .price-original {
+      font-size: 0.72rem; font-weight: 400;
+      color: var(--text-muted);
       text-decoration: line-through;
-      color: var(--text-muted) !important;
-      font-size: 0.72rem !important;
+      display: block;
+      margin-bottom: 2px;
+    }
+    .price-badge {
+      display: inline-block;
+      background: var(--accent);
+      color: #fff;
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.58rem; font-weight: 700;
+      letter-spacing: 0.06em;
+      padding: 2px 7px;
+      border-radius: 6px;
+      margin-left: 6px;
+      vertical-align: middle;
     }
     .price-note {
-      font-size: 0.72rem; font-weight: 300;
-      color: var(--text-muted); margin-top: 14px;
-      line-height: 1.8;
+      font-size: 0.75rem; font-weight: 400;
+      color: var(--text-muted);
+      margin-top: 12px; line-height: 1.8;
     }
 
     /* ── 예약 모델 ── */
     .reserve-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 24px;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
     }
     .reserve-card {
-      border: 1px solid var(--border);
+      border-radius: var(--radius);
       overflow: hidden;
-      position: relative;
+      border: 1px solid var(--border);
+      background: var(--bg2);
+      transition: box-shadow 0.25s, transform 0.25s;
+    }
+    .reserve-card:hover {
+      box-shadow: 0 8px 28px rgba(0,0,0,0.1);
+      transform: translateY(-3px);
     }
     .reserve-img-wrap {
-      width: 100%;
-      aspect-ratio: 3/4;
-      overflow: hidden;
-      background: var(--bg2);
+      width: 100%; aspect-ratio: 3/4;
+      overflow: hidden; background: var(--bg3);
     }
     .reserve-img-wrap img {
       width: 100%; height: 100%;
       object-fit: cover; object-position: top;
-      filter: brightness(0.9);
-      transition: filter 0.3s, transform 0.4s;
+      transition: transform 0.4s;
     }
-    .reserve-card:hover .reserve-img-wrap img {
-      filter: brightness(1);
-      transform: scale(1.02);
-    }
-    .reserve-info {
-      padding: 20px;
-      border-top: 1px solid var(--border);
-    }
+    .reserve-card:hover .reserve-img-wrap img { transform: scale(1.04); }
+    .reserve-info { padding: 18px 20px; }
     .reserve-badge {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.55rem; font-weight: 600;
-      letter-spacing: 0.14em; text-transform: uppercase;
-      background: var(--text); color: var(--bg);
-      display: inline-block; padding: 3px 8px;
-      margin-bottom: 10px;
-    }
-    .reserve-price {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.5rem; font-weight: 300;
+      display: inline-block;
+      background: var(--accent2-light);
+      color: var(--accent2);
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.62rem; font-weight: 700;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      padding: 3px 10px; border-radius: 10px;
       margin-bottom: 8px;
     }
+    .reserve-price {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.5rem; font-weight: 400;
+      color: var(--text); margin-bottom: 8px;
+    }
     .reserve-desc {
-      font-size: 0.75rem; font-weight: 300;
-      color: var(--text-sub); line-height: 1.9;
+      font-size: 0.78rem; font-weight: 400;
+      color: var(--text-sub); line-height: 1.8;
     }
 
     /* ── 작업 순서 ── */
-    .steps { display: flex; flex-direction: column; }
+    .steps { display: flex; flex-direction: column; gap: 0; }
     .step-item {
       display: flex; align-items: flex-start;
-      gap: 24px; padding: 22px 0;
+      gap: 18px; padding: 20px 0;
       border-bottom: 1px solid var(--border);
     }
     .step-item:last-child { border-bottom: none; }
-    .step-num {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.8rem; font-weight: 300;
-      color: var(--text-muted); line-height: 1;
-      min-width: 44px; flex-shrink: 0;
+    .step-num-wrap {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: var(--accent-light);
+      color: var(--accent);
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.75rem; font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
     }
     .step-text {
-      font-size: 0.8rem; font-weight: 300;
-      color: var(--text-sub); line-height: 1.9; padding-top: 2px;
+      font-size: 0.85rem; font-weight: 400;
+      color: var(--text-sub); line-height: 1.8; padding-top: 6px;
     }
     .step-text strong {
-      display: block; font-size: 0.85rem; font-weight: 500;
+      display: block; font-size: 0.9rem; font-weight: 600;
       color: var(--text); margin-bottom: 2px;
     }
 
     /* ── 안내사항 ── */
-    .notice-list { list-style: none; }
+    .notice-list { list-style: none; display: flex; flex-direction: column; }
     .notice-list li {
-      font-size: 0.8rem; font-weight: 300;
+      font-size: 0.85rem; font-weight: 400;
       color: var(--text-sub); line-height: 1.8;
       padding: 13px 0; border-bottom: 1px solid var(--border);
-      display: flex; align-items: flex-start; gap: 12px;
+      display: flex; align-items: flex-start; gap: 10px;
     }
     .notice-list li::before {
-      content: '—'; color: var(--text-muted); flex-shrink: 0;
+      content: '✦';
+      color: var(--accent);
+      font-size: 0.6rem;
+      flex-shrink: 0;
+      margin-top: 5px;
     }
 
     /* ── 신청양식 ── */
     .form-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 18px 32px; margin-bottom: 28px;
+      gap: 16px 24px; margin-bottom: 24px;
     }
     .form-group { display: flex; flex-direction: column; gap: 7px; }
     .form-group.full { grid-column: 1 / -1; }
     .form-group label {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.58rem; font-weight: 500;
-      letter-spacing: 0.14em; text-transform: uppercase;
-      color: var(--text-muted);
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.72rem; font-weight: 700;
+      color: var(--text-sub);
     }
     .form-group input,
     .form-group select,
     .form-group textarea {
-      background: transparent; border: none;
-      border-bottom: 1px solid var(--border-light);
+      background: var(--bg2);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
       color: var(--text);
       font-family: 'Noto Sans KR', sans-serif;
-      font-size: 0.8rem; font-weight: 300;
-      padding: 9px 0; outline: none;
-      transition: border-color 0.2s;
-      width: 100%; -webkit-appearance: none; appearance: none; border-radius: 0;
+      font-size: 0.85rem; font-weight: 400;
+      padding: 10px 14px; outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      width: 100%; -webkit-appearance: none; appearance: none;
     }
     .form-group input::placeholder,
     .form-group textarea::placeholder { color: var(--text-muted); }
     .form-group input:focus,
     .form-group select:focus,
-    .form-group textarea:focus { border-bottom-color: var(--text); }
-    .form-group select { cursor: pointer; color: var(--text-sub); }
-    .form-group select option { background: var(--bg2); color: var(--text); }
-    .form-group textarea { resize: none; line-height: 1.8; }
-    .copy-btn {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.68rem; font-weight: 500;
-      letter-spacing: 0.14em; text-transform: uppercase;
-      padding: 12px 28px;
-      background: var(--text); color: var(--bg);
-      border: none; cursor: pointer; transition: opacity 0.2s;
+    .form-group textarea:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(124,110,224,0.1);
     }
-    .copy-btn:hover { opacity: 0.85; }
+    .form-group select { cursor: pointer; color: var(--text-sub); }
+    .form-group select option { background: var(--bg); color: var(--text); }
+    .form-group textarea { resize: none; line-height: 1.7; }
+    .copy-btn {
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.82rem; font-weight: 700;
+      padding: 12px 28px;
+      background: var(--accent); color: #fff;
+      border: none; border-radius: 24px;
+      cursor: pointer; transition: opacity 0.2s, transform 0.15s;
+      box-shadow: 0 4px 16px rgba(124,110,224,0.28);
+    }
+    .copy-btn:hover { opacity: 0.9; transform: translateY(-1px); }
     .copy-toast {
-      display: none; font-size: 0.7rem; font-weight: 300;
-      color: var(--text-sub); margin-top: 10px;
+      display: none; font-size: 0.75rem; font-weight: 400;
+      color: var(--accent); margin-top: 10px;
     }
     .form-note {
-      font-size: 0.72rem; font-weight: 300;
-      color: var(--text-muted); line-height: 1.9; margin-top: 16px;
+      font-size: 0.75rem; font-weight: 400;
+      color: var(--text-muted); line-height: 1.9; margin-top: 14px;
     }
 
     /* ── 환불 정책 ── */
     .refund-list { list-style: none; }
     .refund-list li {
-      font-size: 0.8rem; font-weight: 300;
+      font-size: 0.85rem; font-weight: 400;
       color: var(--text-sub); line-height: 1.8;
       padding: 16px 0; border-bottom: 1px solid var(--border);
-      display: flex; align-items: flex-start; gap: 16px;
+      display: flex; align-items: flex-start; gap: 14px;
     }
     .refund-list li:last-child { border-bottom: none; }
-    .refund-list li strong {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.6rem; font-weight: 500;
-      letter-spacing: 0.1em; text-transform: uppercase;
-      color: var(--text); min-width: 68px; flex-shrink: 0; padding-top: 2px;
+    .refund-tag {
+      display: inline-block;
+      background: var(--tag-bg);
+      color: var(--tag-text);
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.62rem; font-weight: 700;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      padding: 3px 9px; border-radius: 8px;
+      flex-shrink: 0; margin-top: 2px;
     }
 
     /* ── 푸터 ── */
     .footer {
-      padding: 48px; border-top: 1px solid var(--border);
-      text-align: center;
+      padding: 48px; text-align: center;
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      margin-top: 0;
+    }
+    .footer-heart {
+      font-size: 1.1rem; margin-bottom: 8px; display: block;
     }
     .footer-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.3rem; font-weight: 300; font-style: italic;
-      color: var(--text-sub); margin-bottom: 8px;
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.1rem; font-style: italic;
+      color: var(--text-sub); margin-bottom: 6px;
     }
     .footer-sub {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.58rem; font-weight: 400;
-      letter-spacing: 0.16em; color: var(--text-muted);
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.7rem; font-weight: 600;
+      letter-spacing: 0.1em; color: var(--text-muted);
     }
 
     /* ── 반응형 ── */
     @media (max-width: 640px) {
-      .hero { padding: 60px 24px; min-height: auto; }
-      .section { padding: 56px 24px; }
-      .top-bar { padding: 10px 16px; }
-      .top-bar-nav { gap: 14px; }
-      .showcase-grid { grid-template-columns: repeat(2, 1fr); }
+      .hero { padding: 48px 24px 40px; }
+      .section { padding: 48px 24px; }
+      .top-bar { padding: 0 20px; }
+      .top-bar-nav { gap: 2px; }
+      .top-bar-nav a { padding: 5px 10px; font-size: 0.7rem; }
+      .gif-row { grid-template-columns: 1fr 1fr; gap: 10px; }
+      .gif-row-3 { grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
       .reserve-grid { grid-template-columns: 1fr; }
       .form-grid { grid-template-columns: 1fr; }
       .form-group.full { grid-column: 1; }
@@ -496,7 +580,7 @@
     }
     @media (max-width: 380px) {
       .top-bar-nav { display: none; }
-      .showcase-grid { grid-template-columns: 1fr; }
+      .gif-row-3 { grid-template-columns: 1fr 1fr; }
     }
   </style>
 </head>
@@ -504,7 +588,10 @@
 
   <!-- 상단 네비 -->
   <nav class="top-bar">
-    <div class="top-bar-logo">DALLTO COMMISSION</div>
+    <div class="top-bar-logo">
+      <span class="dot"></span>
+      SIYAN COMMISSION
+    </div>
     <div class="top-bar-nav">
       <a href="#sec-showcase">Works</a>
       <a href="#sec-price">Price</a>
@@ -515,187 +602,213 @@
 
   <!-- 히어로 -->
   <section class="hero">
-    <div class="hero-ribbon">
-      <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" fill="none">
-        <path d="M-100 400 C200 150, 500 650, 800 350 S1200 100, 1600 400" stroke="rgba(255,255,255,0.06)" stroke-width="90" fill="none"/>
-        <path d="M-100 520 C200 270, 500 770, 800 470 S1200 220, 1600 520" stroke="rgba(255,255,255,0.035)" stroke-width="45" fill="none"/>
-      </svg>
-    </div>
-    <div class="hero-content">
-      <div class="hero-label">Live2D Commission · DALLTO</div>
-      <h1 class="hero-title">LIVE 2D<br><em>Commission</em></h1>
-      <div class="hero-sub">달토의 Live2D 커미션</div>
-      <div class="hero-divider"></div>
-      <p class="hero-desc">
-        SD부터 전신 LD까지, 섬세한 물리와 감정 애니메이션으로<br>
-        여러분의 캐릭터를 생동감 있게 만들어드립니다.<br>
-        방송용 · 개인소장용 모두 편하게 문의 주세요.
-      </p>
-      <div class="hero-btns">
-        <a href="#sec-form" class="btn-primary">Apply Now</a>
-        <a href="#sec-price" class="btn-outline">View Pricing</a>
-      </div>
+    <div class="hero-chip">Live2D Commission</div>
+    <h1 class="hero-title">시얀의<br><em>Live2D</em> 커미션</h1>
+    <div class="hero-sub">SIYAN · @SIYAN_COMS</div>
+    <p class="hero-desc">
+      SD부터 전신 LD까지, 섬세한 물리와 감정 애니메이션으로<br>
+      여러분의 캐릭터를 생동감 있게 만들어드립니다.<br>
+      방송용 · 개인소장용 모두 편하게 문의 주세요 ♡
+    </p>
+    <div class="hero-btns">
+      <a href="#sec-form" class="btn-primary">신청하기</a>
+      <a href="#sec-price" class="btn-outline">가격 보기</a>
     </div>
   </section>
 
-  <!-- ECG -->
-  <div class="ecg-line">
-    <svg viewBox="0 0 1440 20" preserveAspectRatio="none" fill="none">
-      <polyline points="0,10 120,10 145,2 160,18 175,2 190,18 205,10 360,10 385,2 400,18 415,2 430,18 445,10 600,10 625,2 640,18 655,2 670,18 685,10 840,10 865,2 880,18 895,2 910,18 925,10 1080,10 1105,2 1120,18 1135,2 1150,18 1165,10 1320,10 1345,2 1360,18 1375,2 1390,18 1440,10" stroke="white" stroke-width="1.2" fill="none"/>
-    </svg>
-  </div>
+  <div class="divider"></div>
 
   <!-- GIF 쇼케이스 -->
   <div class="section" id="sec-showcase">
-    <div class="section-label">Showcase</div>
-    <h2 class="section-title">Live2D 기능 소개<br><em>Feature Showcase</em></h2>
-    <div class="section-divider"></div>
+    <div class="section-chip">Showcase</div>
+    <div class="section-title">Live2D <em>기능 소개</em></div>
     <p class="section-desc">
-      섬세한 눈 물리, 장신구 흔들림, 머리 교체, 감정 애니메이션,<br>
-      XY 추적, Z축 회전까지 — 풍부한 Live2D 기능을 제공합니다.
+      눈 물리부터 감정 애니메이션, XY/Z축 추적까지 — 풍부한 Live2D 기능을 제공합니다.
     </p>
 
-    <div class="showcase-grid">
-      <div class="showcase-item">
-        <img src="https://raw.githubusercontent.com/yunstar3765/-dallto-commission-/main/assets/gif_01_eye_physics.gif" alt="눈 물리" loading="lazy" />
-        <div class="showcase-caption">Eye Physics</div>
+    <!-- 1행: 눈 물리 + 장신구/몸 물리 -->
+    <div class="gif-row gif-section-gap">
+      <div class="gif-block">
+        <div class="gif-img-wrap">
+          <img src="https://raw.githubusercontent.com/yunstar3765/-dallto-commission-/main/assets/gif_01_eye_physics.gif" alt="눈 물리" loading="lazy" />
+        </div>
+        <div class="gif-caption">
+          <div class="gif-caption-title">눈 물리 · Eye Physics</div>
+          <div class="gif-caption-desc">눈동자와 속눈썹의 자연스러운 물리 움직임을 구현합니다.</div>
+        </div>
       </div>
-      <div class="showcase-item">
-        <img src="https://raw.githubusercontent.com/yunstar3765/-dallto-commission-/main/assets/gif_02_body_physics.gif" alt="장신구/몸 물리" loading="lazy" />
-        <div class="showcase-caption">Body &amp; Accessory Physics</div>
-      </div>
-      <div class="showcase-item">
-        <img src="https://raw.githubusercontent.com/yunstar3765/-dallto-commission-/main/assets/gif_03_hair_swap.gif" alt="머리 바꾸기" loading="lazy" />
-        <div class="showcase-caption">Hair Toggle</div>
-      </div>
-      <div class="showcase-item">
-        <img src="https://raw.githubusercontent.com/yunstar3765/-dallto-commission-/main/assets/gif_04_emotion.gif" alt="감정 애니메이션" loading="lazy" />
-        <div class="showcase-caption">Emotion Animation</div>
-      </div>
-      <div class="showcase-item">
-        <img src="https://raw.githubusercontent.com/yunstar3765/-dallto-commission-/main/assets/gif_05_xy1.gif" alt="XY 추적" loading="lazy" />
-        <div class="showcase-caption">XY Tracking</div>
-      </div>
-      <div class="showcase-item">
-        <img src="https://raw.githubusercontent.com/yunstar3765/-dallto-commission-/main/assets/gif_06_xy2.gif" alt="XY 추적 2" loading="lazy" />
-        <div class="showcase-caption">XY Tracking II</div>
+      <div class="gif-block">
+        <div class="gif-img-wrap">
+          <img src="https://raw.githubusercontent.com/yunstar3765/-dallto-commission-/main/assets/gif_02_body_physics.gif" alt="장신구/몸 물리" loading="lazy" />
+        </div>
+        <div class="gif-caption">
+          <div class="gif-caption-title">장신구 · 몸 물리 · Body Physics</div>
+          <div class="gif-caption-desc">귀걸이, 리본 등 장신구와 몸의 흔들림 물리를 구현합니다.</div>
+        </div>
       </div>
     </div>
 
-    <!-- 7번째 Z축 — 와이드 -->
-    <div style="margin-top: 2px;">
-      <div class="showcase-item" style="max-width: 100%;">
-        <img src="https://raw.githubusercontent.com/yunstar3765/-dallto-commission-/main/assets/gif_07_z.gif" alt="Z축 회전" loading="lazy" style="width:100%; aspect-ratio: auto; max-height: 400px; object-fit: cover;" />
-        <div class="showcase-caption" style="opacity:1; position:relative; background: var(--bg2); padding: 10px 16px;">
-          <span style="font-family:'Montserrat',sans-serif; font-size:0.58rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--text-muted);">Z-Axis Rotation</span>
+    <!-- 2행: 머리 바꾸기 + 감정 애니메이션 -->
+    <div class="gif-row gif-section-gap">
+      <div class="gif-block">
+        <div class="gif-img-wrap">
+          <img src="https://raw.githubusercontent.com/yunstar3765/-dallto-commission-/main/assets/gif_03_hair_swap.gif" alt="머리 바꾸기" loading="lazy" />
+        </div>
+        <div class="gif-caption">
+          <div class="gif-caption-title">머리 교체 · Hair Toggle</div>
+          <div class="gif-caption-desc">헤어스타일을 실시간으로 교체할 수 있는 기능입니다.</div>
+        </div>
+      </div>
+      <div class="gif-block">
+        <div class="gif-img-wrap">
+          <img src="https://raw.githubusercontent.com/yunstar3765/-dallto-commission-/main/assets/gif_04_emotion.gif" alt="감정 애니메이션" loading="lazy" />
+        </div>
+        <div class="gif-caption">
+          <div class="gif-caption-title">감정 애니메이션 · Emotion</div>
+          <div class="gif-caption-desc">기쁨, 슬픔 등 다양한 감정 표현 애니메이션을 제공합니다.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3행: XY1 + XY2 + Z축 -->
+    <div class="gif-row-3 gif-section-gap">
+      <div class="gif-block">
+        <div class="gif-img-wrap">
+          <img src="https://raw.githubusercontent.com/yunstar3765/-dallto-commission-/main/assets/gif_05_xy1.gif" alt="XY 추적" loading="lazy" />
+        </div>
+        <div class="gif-caption">
+          <div class="gif-caption-title">XY 추적 I</div>
+          <div class="gif-caption-desc">얼굴의 상하좌우 XY축 추적 움직임입니다.</div>
+        </div>
+      </div>
+      <div class="gif-block">
+        <div class="gif-img-wrap">
+          <img src="https://raw.githubusercontent.com/yunstar3765/-dallto-commission-/main/assets/gif_06_xy2.gif" alt="XY 추적 2" loading="lazy" />
+        </div>
+        <div class="gif-caption">
+          <div class="gif-caption-title">XY 추적 II</div>
+          <div class="gif-caption-desc">다양한 각도의 XY 추적 움직임입니다.</div>
+        </div>
+      </div>
+      <div class="gif-block">
+        <div class="gif-img-wrap">
+          <img src="https://raw.githubusercontent.com/yunstar3765/-dallto-commission-/main/assets/gif_07_z.gif" alt="Z축 회전" loading="lazy" />
+        </div>
+        <div class="gif-caption">
+          <div class="gif-caption-title">Z축 회전 · Z-Axis</div>
+          <div class="gif-caption-desc">고개를 기울이는 Z축 회전 움직임입니다.</div>
         </div>
       </div>
     </div>
 
     <!-- 유튜브 쇼케이스 -->
-    <div style="margin-top: 40px;">
-      <div class="youtube-label">Full Showcase Video</div>
-      <div class="youtube-wrap">
-        <iframe src="https://www.youtube.com/embed/Amay2c3amNA"
-          title="DALLTO Live2D Full Showcase"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    <div class="youtube-label">✦ Full Showcase Video</div>
+    <div class="youtube-wrap">
+      <iframe src="https://www.youtube.com/embed/Amay2c3amNA"
+        title="SIYAN Live2D Full Showcase"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 가격 안내 -->
+  <div class="section" id="sec-price">
+    <div class="section-chip">Pricing</div>
+    <div class="section-title">가격 안내 <em>Price Guide</em></div>
+    <p class="section-desc">원하시는 타입을 선택해 확인해 주세요.</p>
+
+    <div class="price-tabs">
+      <button class="price-tab active" onclick="switchTab(this,'tab-ld')">LD Live2D</button>
+      <button class="price-tab" onclick="switchTab(this,'tab-sd')">SD Live2D</button>
+    </div>
+
+    <!-- LD -->
+    <div class="price-panel active" id="tab-ld">
+      <div class="price-cards">
+        <div class="price-card">
+          <div class="price-card-left">
+            <div class="price-card-type">LD · Full Body Set</div>
+            <div class="price-card-name">전신 일러스트 + 리깅</div>
+            <div class="price-card-desc">파츠분리 일러스트 + 전신 Live2D 리깅 세트</div>
+          </div>
+          <div class="price-card-right">
+            <span class="price-original">450,000원</span>
+            <span class="price-amount">300,000원<span class="price-badge">SALE</span></span>
+          </div>
+        </div>
+        <div class="price-card">
+          <div class="price-card-left">
+            <div class="price-card-type">LD · Illustration Only</div>
+            <div class="price-card-name">캐릭터 파츠분리 일러스트</div>
+            <div class="price-card-desc">Live2D용 파츠분리 일러스트만 제작</div>
+          </div>
+          <div class="price-card-right">
+            <span class="price-amount">400,000원</span>
+          </div>
+        </div>
+        <div class="price-card">
+          <div class="price-card-left">
+            <div class="price-card-type">LD · Rigging Only</div>
+            <div class="price-card-name">전신 리깅</div>
+            <div class="price-card-desc">파츠분리 일러스트 제공 시 리깅만 진행</div>
+          </div>
+          <div class="price-card-right">
+            <span class="price-amount">450,000원</span>
+          </div>
+        </div>
+      </div>
+      <p class="price-note">✦ 현재 샘플 세일 기간 중 — 전신 세트 30만원에 진행 중입니다. 세일 종료 후 정가 45만원으로 복귀 예정입니다.</p>
+    </div>
+
+    <!-- SD -->
+    <div class="price-panel" id="tab-sd">
+      <div class="price-cards">
+        <div class="price-card">
+          <div class="price-card-left">
+            <div class="price-card-type">SD · Set</div>
+            <div class="price-card-name">SD 일러스트 + 리깅</div>
+            <div class="price-card-desc">SD 일러스트 파츠분리 + Live2D 리깅 세트</div>
+          </div>
+          <div class="price-card-right">
+            <span class="price-amount">150,000원</span>
+          </div>
+        </div>
+        <div class="price-card">
+          <div class="price-card-left">
+            <div class="price-card-type">SD · Illustration Only</div>
+            <div class="price-card-name">SD 일러스트</div>
+            <div class="price-card-desc">SD 캐릭터 파츠분리 일러스트만 제작</div>
+          </div>
+          <div class="price-card-right">
+            <span class="price-amount">50,000원</span>
+          </div>
+        </div>
+        <div class="price-card">
+          <div class="price-card-left">
+            <div class="price-card-type">SD · Rigging Only</div>
+            <div class="price-card-name">SD 리깅</div>
+            <div class="price-card-desc">SD 파츠분리 일러스트 제공 시 리깅만 진행</div>
+          </div>
+          <div class="price-card-right">
+            <span class="price-amount">100,000원</span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- 가격 안내 -->
-  <div class="section" id="sec-price">
-    <div class="section-label">Pricing</div>
-    <h2 class="section-title">가격 안내<br><em>Price Guide</em></h2>
-    <div class="section-divider"></div>
-
-    <div class="price-tabs">
-      <button class="price-tab active" onclick="switchTab('ld')">LD Live2D</button>
-      <button class="price-tab" onclick="switchTab('sd')">SD Live2D</button>
-    </div>
-
-    <!-- LD 패널 -->
-    <div class="price-panel active" id="tab-ld">
-      <table class="price-table">
-        <thead>
-          <tr>
-            <th>Type</th>
-            <th>Option</th>
-            <th>Price</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>LD Full Body</td>
-            <td>
-              전신 일러스트 + 리깅<br>
-              <span style="font-size:0.72rem; color:var(--text-muted);">원래 45만원 → 샘플 세일가</span>
-            </td>
-            <td>
-              <span class="price-original">450,000원</span><br>
-              <span class="price-big">300,000원</span>
-              <span class="price-sale">SALE</span>
-            </td>
-          </tr>
-          <tr>
-            <td>LD Illust Only</td>
-            <td>캐릭터 파츠분리 일러스트만</td>
-            <td class="price-big">400,000원</td>
-          </tr>
-          <tr>
-            <td>LD Rigging Only</td>
-            <td>전신 리깅만</td>
-            <td class="price-big">450,000원</td>
-          </tr>
-        </tbody>
-      </table>
-      <p class="price-note">현재 샘플 세일 기간 중 — 전신 세트 30만원에 진행 중입니다.<br>세일 종료 후 정가 45만원으로 복귀 예정입니다.</p>
-    </div>
-
-    <!-- SD 패널 -->
-    <div class="price-panel" id="tab-sd">
-      <table class="price-table">
-        <thead>
-          <tr>
-            <th>Type</th>
-            <th>Option</th>
-            <th>Price</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>SD Illust</td>
-            <td>SD 일러스트 (파츠분리 포함)</td>
-            <td class="price-big">50,000원</td>
-          </tr>
-          <tr>
-            <td>SD Rigging</td>
-            <td>SD 리깅만</td>
-            <td class="price-big">100,000원</td>
-          </tr>
-          <tr>
-            <td>SD Set</td>
-            <td>SD 일러스트 + 리깅</td>
-            <td class="price-big">150,000원</td>
-          </tr>
-        </tbody>
-      </table>
-      <p class="price-note">SD 세트 기준 총 15만원입니다.</p>
-    </div>
-  </div>
+  <div class="divider"></div>
 
   <!-- 예약 모델 -->
   <div class="section" id="sec-reserve">
-    <div class="section-label">Pre-order</div>
-    <h2 class="section-title">예약 버츄얼 모델<br><em>Reserved Virtual Models</em></h2>
-    <div class="section-divider"></div>
+    <div class="section-chip">Pre-order</div>
+    <div class="section-title">예약 버츄얼 모델 <em>Reserved Models</em></div>
     <p class="section-desc">
-      아직 제작 중인 버츄얼 모델입니다.<br>
-      미리 말씀해주시면 원하는 파츠를 추가하여 제작해드립니다.<br>
-      리깅은 달토에게 맡기셔도 되고, 다른 리거에게 맡기셔도 됩니다.
+      아직 제작 중인 버츄얼 모델입니다. 미리 말씀해주시면 원하는 파츠를 추가하여 제작해드립니다.<br>
+      리깅은 시얀에게 맡기셔도 되고, 다른 리거에게 맡기셔도 됩니다 ♡
     </p>
-
     <div class="reserve-grid">
       <div class="reserve-card">
         <div class="reserve-img-wrap">
@@ -706,7 +819,7 @@
           <div class="reserve-price">400,000원</div>
           <div class="reserve-desc">
             일러스트 파츠분리 포함 가격입니다.<br>
-            리깅은 달토 또는 다른 리거에게 별도 의뢰 가능합니다.<br>
+            리깅은 시얀 또는 다른 리거에게 별도 의뢰 가능합니다.<br>
             파츠 추가 희망 시 미리 문의 부탁드립니다.
           </div>
         </div>
@@ -720,7 +833,7 @@
           <div class="reserve-price">450,000원</div>
           <div class="reserve-desc">
             일러스트 파츠분리 포함 가격입니다.<br>
-            리깅은 달토 또는 다른 리거에게 별도 의뢰 가능합니다.<br>
+            리깅은 시얀 또는 다른 리거에게 별도 의뢰 가능합니다.<br>
             파츠 추가 희망 시 미리 문의 부탁드립니다.
           </div>
         </div>
@@ -728,45 +841,47 @@
     </div>
   </div>
 
+  <div class="divider"></div>
+
   <!-- 작업 순서 -->
   <div class="section" id="sec-process">
-    <div class="section-label">Process</div>
-    <h2 class="section-title">작업 순서<br><em>How It Works</em></h2>
-    <div class="section-divider"></div>
-    <div class="steps">
+    <div class="section-chip">Process</div>
+    <div class="section-title">작업 순서 <em>How It Works</em></div>
+    <div class="steps" style="margin-top:8px;">
       <div class="step-item">
-        <div class="step-num">01</div>
+        <div class="step-num-wrap">01</div>
         <div class="step-text"><strong>문의 및 신청</strong>신청양식을 작성해 문의게시판으로 보내주세요.</div>
       </div>
       <div class="step-item">
-        <div class="step-num">02</div>
+        <div class="step-num-wrap">02</div>
         <div class="step-text"><strong>자료 확인 및 견적 안내</strong>캐릭터 자료 확인 후 견적 및 일정을 안내드립니다.</div>
       </div>
       <div class="step-item">
-        <div class="step-num">03</div>
+        <div class="step-num-wrap">03</div>
         <div class="step-text"><strong>결제 확인 후 작업 시작</strong>결제 완료 확인 후 작업이 시작됩니다.</div>
       </div>
       <div class="step-item">
-        <div class="step-num">04</div>
+        <div class="step-num-wrap">04</div>
         <div class="step-text"><strong>일러스트 및 파츠분리 진행</strong>일러스트 작업 및 Live2D용 파츠분리를 진행합니다.</div>
       </div>
       <div class="step-item">
-        <div class="step-num">05</div>
+        <div class="step-num-wrap">05</div>
         <div class="step-text"><strong>리깅 작업 진행</strong>파츠분리된 일러스트를 바탕으로 리깅 작업을 진행합니다.</div>
       </div>
       <div class="step-item">
-        <div class="step-num">06</div>
+        <div class="step-num-wrap">06</div>
         <div class="step-text"><strong>최종 확인 후 전달</strong>최종 파일(PNG + Live2D 파일)을 전달해드립니다.</div>
       </div>
     </div>
   </div>
 
+  <div class="divider"></div>
+
   <!-- 안내사항 -->
   <div class="section" id="sec-notice">
-    <div class="section-label">Notice</div>
-    <h2 class="section-title">안내사항<br><em>Guidelines</em></h2>
-    <div class="section-divider"></div>
-    <ul class="notice-list">
+    <div class="section-chip">Notice</div>
+    <div class="section-title">안내사항 <em>Guidelines</em></div>
+    <ul class="notice-list" style="margin-top:8px;">
       <li>복잡한 장식, 패턴, 악세사리는 일부 생략 또는 단순화될 수 있습니다.</li>
       <li>작업물은 Live2D 구동 기준으로 제작되며, 정지 일러스트와 차이가 있을 수 있습니다.</li>
       <li>기본 제공 범위를 제외한 추가 파츠 및 추가 표정은 별도 비용이 발생합니다.</li>
@@ -775,11 +890,13 @@
     </ul>
   </div>
 
+  <div class="divider"></div>
+
   <!-- 신청양식 -->
   <div class="section" id="sec-form">
-    <div class="section-label">Application</div>
-    <h2 class="section-title">신청양식<br><em>Commission Form</em></h2>
-    <div class="section-divider"></div>
+    <div class="section-chip">Application</div>
+    <div class="section-title">신청양식 <em>Commission Form</em></div>
+    <p class="section-desc">양식을 작성 후 복사하여 문의게시판에 붙여넣기 해주세요.</p>
     <div class="form-grid">
       <div class="form-group">
         <label>닉네임 / Nickname</label>
@@ -825,35 +942,37 @@
         <input id="f-etc" type="text" placeholder="자유롭게 작성해주세요" />
       </div>
     </div>
-    <button class="copy-btn" onclick="copyForm()">Copy &amp; Apply</button>
-    <div class="copy-toast" id="copy-toast">복사됐어요 — 문의게시판에 붙여넣기 해주세요.</div>
-    <p class="form-note">신청양식을 작성 후 복사하여 문의게시판에 붙여넣기 해주세요.<br>확인 후 순차적으로 답변드립니다.</p>
+    <button class="copy-btn" onclick="copyForm()">복사하기 ✦</button>
+    <div class="copy-toast" id="copy-toast">✦ 복사됐어요! 문의게시판에 붙여넣기 해주세요.</div>
+    <p class="form-note">확인 후 순차적으로 답변드립니다.</p>
   </div>
+
+  <div class="divider"></div>
 
   <!-- 환불 정책 -->
   <div class="section" id="sec-refund">
-    <div class="section-label">Policy</div>
-    <h2 class="section-title">환불 정책<br><em>Refund Policy</em></h2>
-    <div class="section-divider"></div>
-    <ul class="refund-list">
-      <li><strong>Rigging</strong>작업의 반 완성 시 30% 환불, 물리 들어갈 시 환불 불가</li>
-      <li><strong>Illust</strong>1차 컨펌 시 40% 환불 / 2차 컨펌 이후 환불 불가</li>
-      <li><strong>Set</strong>리깅 시작 이후 환불 불가</li>
+    <div class="section-chip">Policy</div>
+    <div class="section-title">환불 정책 <em>Refund Policy</em></div>
+    <ul class="refund-list" style="margin-top:16px;">
+      <li><span class="refund-tag">Rigging</span>작업의 반 완성 시 30% 환불, 물리 들어갈 시 환불 불가</li>
+      <li><span class="refund-tag">Illust</span>1차 컨펌 시 40% 환불 / 2차 컨펌 이후 환불 불가</li>
+      <li><span class="refund-tag">Set</span>리깅 시작 이후 환불 불가</li>
     </ul>
   </div>
 
   <!-- 푸터 -->
   <footer class="footer">
+    <span class="footer-heart">♡</span>
     <div class="footer-title">소중한 작업 맡겨주셔서 감사합니다.</div>
-    <div class="footer-sub">DALLTO &nbsp;·&nbsp; Live2D Commission &nbsp;·&nbsp; @DALLTO_COMS</div>
+    <div class="footer-sub">SIYAN &nbsp;·&nbsp; Live2D Commission &nbsp;·&nbsp; @SIYAN_COMS</div>
   </footer>
 
   <script>
-    function switchTab(type) {
+    function switchTab(btn, tabId) {
       document.querySelectorAll('.price-tab').forEach(t => t.classList.remove('active'));
       document.querySelectorAll('.price-panel').forEach(p => p.classList.remove('active'));
-      document.getElementById('tab-' + type).classList.add('active');
-      event.target.classList.add('active');
+      btn.classList.add('active');
+      document.getElementById(tabId).classList.add('active');
     }
 
     function copyForm() {
